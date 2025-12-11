@@ -1,0 +1,145 @@
+# Design Tokens
+
+This Storybook demonstrates how design tokens extracted from Figma can be converted to CSS custom properties and used in components.
+
+## Overview
+
+Design tokens are the visual design atoms of the design system — specifically, they are named entities that store visual design attributes. We use them in place of hard-coded values in order to maintain a scalable and consistent visual system.
+
+## Token Categories
+
+### Colors
+
+Our color palette includes primary, secondary, and semantic colors:
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem', margin: '2rem 0' }}>
+  <div style={{ background: 'var(--color-primary)', padding: '2rem', borderRadius: '0.5rem', color: 'white', fontWeight: 600 }}>
+    Primary<br/>
+    <small style={{ opacity: 0.9 }}>#6366f1</small>
+  </div>
+  <div style={{ background: 'var(--color-secondary)', padding: '2rem', borderRadius: '0.5rem', color: 'white', fontWeight: 600 }}>
+    Secondary<br/>
+    <small style={{ opacity: 0.9 }}>#8b5cf6</small>
+  </div>
+  <div style={{ background: 'var(--color-success)', padding: '2rem', borderRadius: '0.5rem', color: 'white', fontWeight: 600 }}>
+    Success<br/>
+    <small style={{ opacity: 0.9 }}>#10b981</small>
+  </div>
+  <div style={{ background: 'var(--color-warning)', padding: '2rem', borderRadius: '0.5rem', color: 'white', fontWeight: 600 }}>
+    Warning<br/>
+    <small style={{ opacity: 0.9 }}>#f59e0b</small>
+  </div>
+  <div style={{ background: 'var(--color-error)', padding: '2rem', borderRadius: '0.5rem', color: 'white', fontWeight: 600 }}>
+    Error<br/>
+    <small style={{ opacity: 0.9 }}>#ef4444</small>
+  </div>
+</div>
+
+### Typography
+
+Font families, sizes, and weights:
+
+```css
+--font-family-base: 'Inter', sans-serif;
+--font-size-xs: 0.75rem;
+--font-size-sm: 0.875rem;
+--font-size-base: 1rem;
+--font-size-lg: 1.125rem;
+--font-size-xl: 1.25rem;
+--font-size-2xl: 1.5rem;
+--font-size-3xl: 1.875rem;
+```
+
+### Spacing
+
+Consistent spacing scale:
+
+<div style={{ margin: '2rem 0' }}>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-xs)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-xs: 0.25rem (4px)</code>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-sm)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-sm: 0.5rem (8px)</code>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-md)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-md: 1rem (16px)</code>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-lg)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-lg: 1.5rem (24px)</code>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-xl)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-xl: 2rem (32px)</code>
+  </div>
+  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.5rem' }}>
+    <div style={{ width: 'var(--spacing-2xl)', height: '2rem', background: 'var(--color-primary)' }}></div>
+    <code>--spacing-2xl: 3rem (48px)</code>
+  </div>
+</div>
+
+### Border Radius
+
+Rounded corner options:
+
+<div style={{ display: 'flex', gap: '1rem', margin: '2rem 0' }}>
+  <div style={{ width: '80px', height: '80px', background: 'var(--color-primary)', borderRadius: 'var(--radius-sm)' }}></div>
+  <div style={{ width: '80px', height: '80px', background: 'var(--color-primary)', borderRadius: 'var(--radius-md)' }}></div>
+  <div style={{ width: '80px', height: '80px', background: 'var(--color-primary)', borderRadius: 'var(--radius-lg)' }}></div>
+  <div style={{ width: '80px', height: '80px', background: 'var(--color-primary)', borderRadius: 'var(--radius-xl)' }}></div>
+  <div style={{ width: '80px', height: '80px', background: 'var(--color-primary)', borderRadius: 'var(--radius-full)' }}></div>
+</div>
+
+```css
+--radius-sm: 0.25rem
+--radius-md: 0.5rem
+--radius-lg: 0.75rem
+--radius-xl: 1rem
+--radius-full: 9999px
+```
+
+### Shadows
+
+Elevation levels:
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem', margin: '2rem 0' }}>
+  <div style={{ background: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: 'var(--shadow-sm)' }}>
+    <strong>Small</strong><br/>
+    <small>--shadow-sm</small>
+  </div>
+  <div style={{ background: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: 'var(--shadow-md)' }}>
+    <strong>Medium</strong><br/>
+    <small>--shadow-md</small>
+  </div>
+  <div style={{ background: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: 'var(--shadow-lg)' }}>
+    <strong>Large</strong><br/>
+    <small>--shadow-lg</small>
+  </div>
+  <div style={{ background: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: 'var(--shadow-xl)' }}>
+    <strong>Extra Large</strong><br/>
+    <small>--shadow-xl</small>
+  </div>
+</div>
+
+## Usage
+
+All design tokens are defined as CSS custom properties in `design-tokens.css`. Components can reference these tokens:
+
+```css
+.my-component {
+  color: var(--color-primary);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+```
+
+## Figma to Storybook Workflow
+
+1. **Extract tokens from Figma** - Use the Figma API or plugins to extract design tokens
+2. **Convert to CSS** - Transform tokens into CSS custom properties
+3. **Import in components** - Use tokens in component styles
+4. **Document in Storybook** - Create stories showcasing the components

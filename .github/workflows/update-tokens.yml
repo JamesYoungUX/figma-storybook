@@ -1,0 +1,64 @@
+name: Update Design Tokens
+
+on:
+  # Trigger when tokens-test repo updates
+  repository_dispatch:
+    types: [tokens-updated]
+  
+  # Also allow manual trigger
+  workflow_dispatch:
+  
+  # Or run on a schedule (every 5 minutes for testing, adjust as needed)
+  schedule:
+    - cron: '*/5 * * * *'  # Every 5 minutes
+
+jobs:
+  update-tokens:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Pull latest tokens from GitHub
+        run: |
+          curl -H "Accept: application/vnd.github.v3.raw" \
+               "https://api.github.com/repos/jamesyoung-tech/tokens-test/contents/tokens/design-tokens.json" \
+               -o tokens/design-tokens.json
+      
+      - name: Import tokens
+        run: npm run import-tokens tokens/design-tokens.json
+      
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet src/design-tokens.css || echo "changed=true" >> $GITHUB_OUTPUT
+      
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/design-tokens.css
+          git commit -m "🎨 Update design tokens from Figma"
+          git push
+      
+      - name: Build Storybook (optional)
+        if: steps.check_changes.outputs.changed == 'true'
+        run: npm run build-storybook
+      
+      # Optional: Deploy to GitHub Pages or other hosting
+      # - name: Deploy to GitHub Pages
+      #   if: steps.check_changes.outputs.changed == 'true'
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
+      #     publish_dir: ./storybook-static
