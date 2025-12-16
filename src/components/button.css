@@ -1,12 +1,11 @@
 @import '../design-tokens.css';
 
 .btn {
-    font-family: var(--font-family-base);
-    font-weight: var(--font-weight-medium);
+    font-family: var(--typography-ds-font-button-text-fontFamily, var(--font-family-base));
+    font-weight: var(--typography-ds-font-button-text-fontWeight, var(--font-weight-medium));
+    font-size: var(--typography-ds-font-button-text-fontSize, 1rem);
     border: none;
-    border-radius: var(--borders-button-test-radius);
-    /* Using your GitHub token! */
-    border-width: var(--borders-button-test-width);
+    border-radius: var(--borders-components-button-primary-radius, 0.5rem);
     cursor: pointer;
     transition: all 0.2s ease;
     display: inline-flex;
@@ -26,9 +25,8 @@
 
 /* Variants */
 .btn--primary {
-    background-color: var(--colors-ds-color-button-test);
-    /* Using your GitHub token! */
-    color: white;
+    background-color: var(--colors-ds-color-components-button-primary);
+    color: var(--colors-ds-color-button-text, white);
 }
 
 .btn--primary:hover {
